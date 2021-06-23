@@ -9,17 +9,26 @@ const Expenses = ({ expenses }) => {
   const dateFilterHandler = (selectedDate) => {
     setFilteredDate(selectedDate);
   };
+  const filteredExpenses = expenses.filter(
+    (item) => item.date.getFullYear().toString() === filteredDate
+  );
+
+  let filteredContent = <p>No Expenses Found</p>;
+  if (filteredExpenses.length > 0) {
+    filteredContent = filteredExpenses.map((expense) => (
+      <ExpenseItem
+        key={expense.id}
+        title={expense.title}
+        amount={expense.amount}
+        date={expense.date}
+      />
+    ));
+  }
   return (
     <div>
       <Card className="expenses">
         <ExpensesFilter onDateFilter={dateFilterHandler} date={filteredDate} />
-        {expenses.map((expense) => (
-          <ExpenseItem
-            title={expense.title}
-            amount={expense.amount}
-            date={expense.date}
-          />
-        ))}
+        {filteredContent}
       </Card>
     </div>
   );
