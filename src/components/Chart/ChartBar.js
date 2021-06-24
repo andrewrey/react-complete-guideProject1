@@ -1,7 +1,7 @@
 import "./ChartBar.css";
 
-const ChartBar = ({ key, value, maxValue, label }) => {
-  const barFillHeight = "0%";
+const ChartBar = ({ value, maxValue, label }) => {
+  let barFillHeight = "0%";
   if (maxValue > 0) {
     barFillHeight = `${Math.round((value / maxValue) * 100)}%`;
   }
